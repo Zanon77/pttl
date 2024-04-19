@@ -1,57 +1,72 @@
-class circle{
+import java.util.Scanner;
+
+class Circle {
     private double x_axis;
     private double y_axis;
     private double radius;
 
-    public circle(){}
-    public circle(double x_axis,double y_axis){
-        this.x_axis=x_axis;
-        this.y_axis=y_axis;
+    public Circle() {}
+
+    public Circle(double x_axis, double y_axis) {
+        this.x_axis = x_axis;
+        this.y_axis = y_axis;
     }
-    public circle(circle c){
-        this.setAxis(7,4);
+
+    public Circle(Circle c) {
+        this.x_axis = c.x_axis;
+        this.y_axis = c.y_axis;
+        this.radius = c.radius;
     }
-    public void setAxis(double x_axis,double y_axis){
-        this.x_axis=x_axis;
-        this.y_axis=y_axis;
+
+    public void setAxis(double x_axis, double y_axis) {
+        this.x_axis = x_axis;
+        this.y_axis = y_axis;
     }
-    /*
-  (x-h)^2+(y-k)^2=r^2
-  h,k are coordinates of centres
-  i.e x_axis and y_axis
-  */
-    public void calRadius(double x, double y){
-        this.radius=(x_axis == 0 && y_axis == 0)? 0: Math.sqrt(Math.pow(x-x_axis,2)+Math.pow(y-y_axis,2));
+
+    public void calRadius(double x, double y) {
+        this.radius = (x_axis == 0 && y_axis == 0) ? 0 : Math.sqrt(Math.pow(x - x_axis, 2) + Math.pow(y - y_axis, 2));
     }
-    public double area(){
-        return (Math.PI*radius*radius);
+
+    public double area() {
+        return (Math.PI * radius * radius);
     }
-    public double circumference(){
-        return (2*Math.PI*radius);
+
+    public double circumference() {
+        return (2 * Math.PI * radius);
     }
-    public void display(){
-        System.out.println("Centre: ("+x_axis+","+y_axis+")");
-        System.out.println("Radius: "+radius);
+
+    public void display() {
+        System.out.println("Centre: (" + x_axis + "," + y_axis + ")");
+        System.out.println("Radius: " + radius);
     }
 }
+
 public class Assignment_2 {
-    public static void main(String[] args){
-        final int max =3;
-        circle[] cr =new circle[max];
-        cr[0] = new circle();                 //Default constructor
-        cr[0].setAxis(10,7);
-        cr[0].calRadius(2,5);
+    public static void main(String[] args) {
+        final int max = 3;
+        Circle[] cr = new Circle[max];
+        Scanner sc = new Scanner(System.in);
+        double x, y;
 
-        cr[1] = new circle(8,6); //Parameterized constructor
-        cr[1].calRadius(2,1);
+        System.out.println("Enter x coordinate:");
+        x = sc.nextDouble();
+        System.out.println("Enter y coordinate:");
+        y = sc.nextDouble();
 
-        cr[2] = new circle(cr[0]);            //Copy constructor
-        cr[2].calRadius(3,1);
+        cr[0] = new Circle(); // Default constructor
+        cr[0].setAxis(x, y);
+        cr[0].calRadius(2, 5);
 
-        for(circle c:cr){
+        cr[1] = new Circle(8, 6); // Parameterized constructor
+        cr[1].calRadius(2, 1);
+
+        cr[2] = new Circle(cr[0]); // Copy constructor
+        cr[2].calRadius(3, 1);
+
+        for (Circle c : cr) {
             c.display();
-            System.out.println("Area: "+c.area());
-            System.out.println("Circumference: "+c.circumference());
+            System.out.println("Area: " + c.area());
+            System.out.println("Circumference: " + c.circumference());
             System.out.println("\n");
         }
     }
