@@ -10,7 +10,7 @@ class january extends Thread{
     public void run() {
         int i=0;
         while(i<5){
-            System.out.println("Hello!! Im January with id:"+Thread.currentThread().threadId());
+            System.out.println("Hello!! Im January with id:"+Thread.currentThread().getId());
             i++;
         }
     }
@@ -87,11 +87,11 @@ public class Assignment7 {
      //Case 1 Creating Thread by extending Thread class
                     january jan = new january("First Month");
                     System.out.println("Thread Name of January: " + jan.getName());
-                    System.out.println("Thread Id of January: " + jan.threadId());
+                    System.out.println("Thread Id of January: " + jan.getId());
                     february feb = new february();
                     feb.setName("Second Month");
                     System.out.println("Thread Name of February: " + feb.getName());
-                    System.out.println("Thread Id of February: " + feb.threadId());
+                    System.out.println("Thread Id of February: " + feb.getId());
                     jan.start();
                     feb.start();
 
@@ -103,9 +103,9 @@ public class Assignment7 {
                     Thread th2 = new Thread(apr);
                     th2.setName("Fourth Month");
                     System.out.println("Thread Name of March: " + th1.getName());
-                    System.out.println("Thread Id of March: " + th1.threadId());
+                    System.out.println("Thread Id of March: " + th1.getId());
                     System.out.println("Thread Name of April: " + th2.getName());
-                    System.out.println("Thread Id of April: " + th2.threadId());
+                    System.out.println("Thread Id of April: " + th2.getId());
                     th1.start();
                     th2.start();
 
@@ -113,9 +113,9 @@ public class Assignment7 {
                     may may = new may("Fifth Month");
                     june jun = new june("Sixth Month");
                     System.out.println("Thread Name of May: " + may.getName());
-                    System.out.println("Thread Id of May: " + may.threadId());
+                    System.out.println("Thread Id of May: " + may.getId());
                     System.out.println("Thread Name of June: " + jun.getName());
-                    System.out.println("Thread Id of June: " + jun.threadId());
+                    System.out.println("Thread Id of June: " + jun.getId());
                     may.start();
                     jun.start();
 
