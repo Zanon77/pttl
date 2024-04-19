@@ -1,0 +1,112 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import java.util.Random;
+
+interface topspeed{
+    int favno=7;
+    void speed(int speed);
+}
+interface horn extends topspeed{
+    void horn1(String horn);
+    default void abs(){
+        System.out.println("Congratulation!! This bike will have dual ABS.");
+        System.out.println("As you are our "+favno+ "th customer!!");
+    }
+}
+abstract class features{
+    abstract public void tankcapacity(int litres);
+    abstract public void cc(int cc);
+    public void headlight(String light){
+        System.out.println("Headlight: "+light);
+    }
+}
+class bike extends features implements horn{
+    @Override
+    public void speed(int speed){
+        System.out.println("Top speed: "+speed+" kmps");
+    }
+    @Override
+    public void horn1(String horn) {
+        System.out.println("Horn sound: "+horn);
+    }
+
+    @Override
+    public void tankcapacity(int litres) {
+        System.out.println("Tank capacity: "+litres+"L");
+    }
+    @Override
+    public void cc(int cc){
+        System.out.println("Cubic capacity: "+cc+"cc");
+    }
+}
+public class assignment5_1{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random rd = new Random();
+        features f1 = new bike();
+        topspeed t1= new bike();
+        horn h1= new bike();
+        int speed=0;
+        int cc=0;
+        int litres=0;
+        int date;
+        String horn=null;
+        String name=null;
+        String light=null;
+        int choice=0;
+
+        do {
+            System.out.println("Enter your choice");
+            System.out.println("1.Customise your bike\n2.Display your bike\n3.Exit");
+            System.out.print("Your choice: ");
+            try {
+                choice = sc.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("(╯°□°）╯︵ ┻━┻");
+                System.out.println("Invalid input,Enter Integer value\n");
+                sc.nextLine();
+                continue;
+            }
+            sc.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter your bike name: ");
+                    name = sc.nextLine();
+                    System.out.print("Enter the cc required: ");
+                    cc =sc.nextInt();
+                    System.out.print("Enter tank capacity of bike: ");
+                    litres = sc.nextInt();
+                    System.out.print("Enter the top speed: ");
+                    speed = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Enter sound of horn required: ");
+                    horn = sc.nextLine();
+                    System.out.print("Enter the headlight required: ");
+                    light=sc.nextLine();
+
+
+                    System.out.println("Data entered successfully!\n");
+                    break;
+                case 2:
+                    date = rd.nextInt(31)+1;
+                    System.out.println("\nDisplaying Details of "+name);
+                    f1.tankcapacity(litres);
+                    t1.speed(speed);
+                    h1.horn1(horn);
+                    f1.cc(cc);
+                    f1.headlight(light);
+                    h1.abs();
+                    System.out.println("Delivery date: "+date+"/3/2024\n");
+                    break;
+                case 3:
+                    System.out.println("Exiting..");
+                    System.out.println("¯\\_( ͡❛ ͜ʖ ͡❛)_/¯");
+                    break;
+                default:
+                    System.out.println("Invalid choice,choose again!\n");
+            }
+        }while(choice!=3);
+    }
+}

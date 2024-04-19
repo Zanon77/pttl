@@ -1,0 +1,137 @@
+import java.lang.Thread;
+import java.lang.Runnable;
+
+class january extends Thread{
+    public january(){}
+    public january(String name){
+        super(name);
+    }
+    @Override
+    public void run() {
+        int i=0;
+        while(i<5){
+            System.out.println("Hello!! Im January with id:"+Thread.currentThread().threadId());
+            i++;
+        }
+    }
+}
+class february extends Thread{
+    @Override
+    public void run() {
+        int i=0;
+        while(i<5){
+            System.out.println("Hey!! Im February");
+            i++;
+        }
+    }
+}
+class march implements Runnable{
+    public void run(){
+        int i=0;
+        while(i<5) {
+            System.out.println("Hii!! Im "+Thread.currentThread().getName());
+            i++;
+        }
+    }
+}
+class april implements Runnable{
+    public void run(){
+        int i=0;
+        while(i<5) {
+            System.out.println("Yo!! Im April");
+            i++;
+        }
+    }
+}
+class may extends Thread{
+    public may(){}
+    public may(String name){
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        int i = 0;
+        while (i < 5) {
+            System.out.println("Hola!! Im May");
+            i++;
+            try{
+                    Thread.sleep(1000);
+            }catch (InterruptedException e){
+                System.out.println(e);
+            }
+        }
+    }
+}
+class june extends Thread{
+    public june(String name){
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        int i = 0;
+        while (i < 5) {
+            System.out.println("Heh!! Im June");
+            i++;
+            try{
+                    Thread.sleep(3000);
+            }catch (InterruptedException e){
+                System.out.println(e);
+            }
+        }
+    }
+}
+public class Assignment7 {
+    public static void main(String[] args) {
+     //Case 1 Creating Thread by extending Thread class
+                    january jan = new january("First Month");
+                    System.out.println("Thread Name of January: " + jan.getName());
+                    System.out.println("Thread Id of January: " + jan.threadId());
+                    february feb = new february();
+                    feb.setName("Second Month");
+                    System.out.println("Thread Name of February: " + feb.getName());
+                    System.out.println("Thread Id of February: " + feb.threadId());
+                    jan.start();
+                    feb.start();
+
+    //case 2 Creating Thread by implementing runnable
+                    march mar = new march();
+                    Thread th1 = new Thread(mar);
+                    th1.setName("March");
+                    april apr = new april();
+                    Thread th2 = new Thread(apr);
+                    th2.setName("Fourth Month");
+                    System.out.println("Thread Name of March: " + th1.getName());
+                    System.out.println("Thread Id of March: " + th1.threadId());
+                    System.out.println("Thread Name of April: " + th2.getName());
+                    System.out.println("Thread Id of April: " + th2.threadId());
+                    th1.start();
+                    th2.start();
+
+    //case 3 Using sleep()
+                    may may = new may("Fifth Month");
+                    june jun = new june("Sixth Month");
+                    System.out.println("Thread Name of May: " + may.getName());
+                    System.out.println("Thread Id of May: " + may.threadId());
+                    System.out.println("Thread Name of June: " + jun.getName());
+                    System.out.println("Thread Id of June: " + jun.threadId());
+                    may.start();
+                    jun.start();
+
+    //case 4 Using Setpriority()
+                    january Jan = new january();
+                    february Feb = new february();
+                    april Apr = new april();
+                    Thread Th = new Thread(Apr);
+                    may May = new may();
+                    Jan.setPriority(Thread.MIN_PRIORITY);
+                    Feb.setPriority(Thread.NORM_PRIORITY);
+                    Th.setPriority(Thread.MAX_PRIORITY);
+                    May.setPriority(7);
+                    Jan.start();
+                    Feb.start();
+                    Th.start();
+                    May.start();
+        }
+    }

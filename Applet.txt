@@ -1,0 +1,18 @@
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.Graphics;
+    public class assignment9 extends Applet {
+
+
+        @Override
+        public void init() {
+            setBackground(Color.BLACK);
+            setForeground(Color.BLUE);
+        }
+        @Override
+        public void paint(Graphics g) {
+            super.paint(g);
+            g.drawString("Hello Everyone", 100, 100);
+            showStatus("Made by: Chaman Sinha");
+        }
+    }

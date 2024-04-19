@@ -1,0 +1,105 @@
+import java.util.Scanner;
+
+public class assignment_4 {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("\nChoice any option");
+            System.out.println("1.Pass object as parameter\n2.Return a object\n3.Array of object(Using Constructor)\n4.Array of object (Using Method)\n5.Count number of object created\n6.Exit");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    int num1, num2;
+
+                    Counting[] Carray = new Counting[2];
+                    for (int i = 0; i < 2; i++) {
+                        System.out.println("Enter the first number");
+                        num1 = sc.nextInt();
+                        System.out.println("Enter the second number");
+                        num2 = sc.nextInt();
+                        Carray[i] = new Counting(num1, num2);
+                        System.out.println("Data Entered..\n");
+                    }
+                    boolean Result = Carray[0].Compare(Carray[1]);
+                    if (Result) {
+                        System.out.println("The numbers are matching");
+                    } else {
+                        System.out.println("The numbers are not matching");
+                    }
+                    break;
+                case 2:
+                    System.out.print("Enter the CGPA of Sem III : ");
+                    float cgpa = sc.nextFloat();
+                    student std = new student(cgpa);
+                    student Astd = std.increasemarks();
+                    System.out.println("Due to some error previously, your actually CGPA is: " + Astd.cgpa);
+                    break;
+
+                case 3:
+                    System.out.print("Enter number of Employee: ");
+                    int numEmp = sc.nextInt();
+                    employe[] emp = new employe[numEmp];
+                    sc.nextLine();
+                    for (int i = 0; i < numEmp; i++) {
+                        System.out.print("Enter Name: ");
+                        String name = sc.nextLine();
+                        System.out.print("Enter ID: ");
+                        int id = sc.nextInt();
+                        System.out.print("Enter Age: ");
+                        int age = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Branch: ");
+                        String branch = sc.nextLine();
+                        System.out.print("Enter Experience: ");
+                        int exp = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Data Stored!");
+
+                        emp[i] = new employe(age, id, exp, name, branch);
+                        emp[i].Display();
+                    }
+                    break;
+                case 4:
+                    System.out.print("Enter number of Employee: ");
+                    int numEm = sc.nextInt();
+                    employe[] em = new employe[numEm];
+                    sc.nextLine();
+                    for (int i = 0; i < numEm; i++) {
+                        System.out.print("Enter Name: ");
+                        String name = sc.nextLine();
+                        System.out.print("Enter ID: ");
+                        int id = sc.nextInt();
+                        System.out.print("Enter Age: ");
+                        int age = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Branch: ");
+                        String branch = sc.nextLine();
+                        System.out.print("Enter Exp: ");
+                        int exp = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Data Stored!\n");
+
+                        em[i] = new employe();
+                        em[i].setData(age, id, exp, name, branch);
+                        em[i].Display();
+                    }
+                    break;
+                case 5:
+                    Counter c1 = new Counter();
+                    Counter c2 = new Counter();
+                    Counter c3 = new Counter(2);
+                    Counter c4 = new Counter(3);
+                    Counter c5 = new Counter();
+                    System.out.println("Number of object created: " + Counter.count);
+                    break;
+                case 6:
+                    System.out.println("Exiting the program");
+                    break;
+                default:
+                    System.out.println("Invalid choice.Choose again");
+            }
+        }while (choice!=6);
+        sc.close();
+    }
+}

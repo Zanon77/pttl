@@ -1,0 +1,143 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+class myexcep extends Exception{
+    public myexcep(String msg){
+       super(msg);
+    }
+}
+class InputmismatchExp {
+    int num;
+    public void sum(int num1,int num2){
+        num=num1+num2;
+        System.out.println(num);
+    }
+}
+class Myexceptionuse {
+    double area;
+    public void area(Double radius) throws myexcep{
+        if(radius <0){
+            throw new myexcep("Radius cannot be negative");
+        }else {
+            System.out.println("Area of the circle is: "+Math.PI * radius * radius);
+        }
+    }
+}
+class ArimethmicExp{
+            int num;
+            public void sum(int num1){
+                num=num1/0;
+                System.out.println(num);
+            }
+    }
+public class assignment8 {
+    public static void main(String[] args) {
+        InputmismatchExp Ixp = new InputmismatchExp();
+        ArimethmicExp Axp = new ArimethmicExp();
+        Myexceptionuse Mxp =new Myexceptionuse();
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("\nEnter your choice");
+            System.out.println("1.InputMismatchException\n2.ArithmeticException\n3.IndexOutOfBoundException\n4.CustomException\n5.ClassNotFoundException\n6.NullPointerException\n7.NumberFormatException\n8.StringIndexOutOfBoundsException\n9.Exit\n");
+            System.out.print("Your choice: ");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    int num1, num2 = 0;
+                    try {
+                        System.out.println("Enter number a");
+                        num1 = sc.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println(e);
+                        sc.next();
+                        continue;
+                    }
+                    try {
+                        System.out.println("Enter number b");
+                        num2 = sc.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println(e);
+                        continue;
+                    }finally {
+                        System.out.println("Resources are freed..");
+                    }
+                    Ixp.sum(num1, num2);
+                    break;
+                case 2:
+                    int num;
+                    System.out.println("Enter a number");
+                    num = sc.nextInt();
+                    try {
+                        Axp.sum(num);
+                    } catch (ArithmeticException e) {
+                        System.out.println(e);
+                    }
+                    break;
+                case 3:
+                    String[] names = {"Chaman", "Priyanshu", "Adbul", "Pritesh"};
+                    System.out.println("Enter the index which needs to be displayed");
+                    int index = sc.nextInt();
+                    try {
+                            System.out.println(names[index]);
+                    }catch (IndexOutOfBoundsException e){
+                    System.out.println(e);
+                         }
+                    break;
+                case 4:
+                    System.out.println("Enter the radius of the circle");
+                    double radius=sc.nextDouble();
+                    try {
+                        Mxp.area(radius);
+                    }catch (myexcep e){
+                        System.out.println(e);
+                    }
+                    break;
+                case 5:
+                    try {
+                        Class<?> cls = Class.forName("NonExistentClass");
+                        //Class<?> cls = Class.forName("java.lang.String");
+                    } catch (ClassNotFoundException e) {
+                        System.err.println("Class not found: " + e.getMessage());
+                    }
+                    break;
+                case 6:
+                    String str = null;
+                    try {
+                        int length = str.length();
+                        System.out.println("Length of the string: " + length);
+                    } catch (NullPointerException e) {
+                        System.err.println("NullPointerException caught: " + e.getMessage());
+                    }
+                    break;
+                case 7:
+                    sc.nextLine();
+                    System.out.println("Enter a String");
+                    String s = sc.nextLine();
+                    try {
+                        int number = Integer.parseInt(s);
+                        System.out.println("Parsed number: " + number);
+                    } catch (NumberFormatException e) {
+                        System.err.println("NumberFormatException caught: " + e.getMessage());
+                    }
+                    break;
+                case 8:
+                    sc.nextLine();
+                    System.out.println("Enter a String");
+                    String st =sc.nextLine();
+                    try {
+                        char ch = st.charAt(10);
+                        System.out.println("Character at index 10: " + ch);
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.err.println("StringIndexOutOfBoundsException caught: " + e.getMessage());
+                    }
+                    break;
+                case 9:
+                    System.out.println("Exiting..");
+                    break;
+                default:
+                    System.out.println("Incorrect option.");
+            }
+        }while (choice!=9);
+    }
+}

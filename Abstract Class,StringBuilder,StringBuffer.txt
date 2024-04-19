@@ -1,0 +1,326 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+abstract class shape{
+    void displayname(String shapename){
+        System.out.println("\n----------------------");
+        System.out.println(" Welcome to "+shapename);
+        System.out.println("----------------------");
+    }
+    abstract double area();
+    abstract double perimeter();
+    abstract String information();
+}
+class rectangle extends shape{
+    private double lenght,breadth;
+    final String details="A rectangle is a four-sided polygon with opposite sides of " +
+                    "equal length and all angles equal to 90 degrees. \n" +
+                     "Its area is calculated by multiplying the length and width, \n" +
+                     "and the perimeter is twice the sum of length and width.";
+    void setlenght(double lenght){
+        this.lenght=lenght;
+    }
+    void setBreadth(double breadth){
+        this.breadth=breadth;
+    }
+    @Override
+    double area(){
+        return lenght*breadth;
+    }
+
+    @Override
+    double perimeter(){
+        return 2*(lenght+breadth);
+    }
+    @Override
+    String information(){
+        return details;
+    }
+}
+class circlec extends shape{
+    private double radius;
+    final String details="A circle is a 2D shape with all points equidistant from a center;\n" +
+                    "its circumference is 2*Pi times the radius, \n" +
+                    "and its area is Pi times the square of the radius.";
+    void setRadius(double radius){
+        this.radius=radius;
+    }
+
+    double diameter(){
+        return 2*radius;
+    }
+    @Override
+    double area() {
+        return Math.PI*Math.pow(radius,2);
+    }
+    @Override
+    double perimeter(){
+        return 2*Math.PI*radius;
+    }
+    @Override
+    String information(){
+        return details;
+    }
+
+}
+class triangle extends shape{
+    private double height,length,base,area;
+    private double aside,bside,cside;
+    final String details="A triangle is a three-sided polygon with diverse types (e.g., equilateral, isosceles, scalene).\n" +
+                  "Its area is calculated using 1/2*base*height, \n" +
+                  "and the perimeter is the sum of its three sides.";
+
+    public void setsides(double aside,double bside,double cside) {
+        this.aside = aside;
+        this.bside = bside;
+        this.cside = cside;
+    }
+    public void sethl(double height,double length) {
+        this.height = height;
+        this.length = length;
+    }
+    public void setforheight(double base,double area){
+        this.base=base;
+        this.area=area;
+    }
+
+    double height(){
+        return (area/base)*2;
+    }
+    @Override
+    double area(){
+        return (length*height)/2;
+    }
+    @Override
+    double perimeter(){
+        return aside+bside+cside;
+    }
+    @Override
+    String information(){
+        return details;
+    }
+}
+class myexception extends Exception{
+    public String toString(){
+        return "Value should not be negative.\n";
+    }
+}
+public class assignment6{
+    public static void main(String[] args) {
+        rectangle r = new rectangle();
+        shape r1 =new rectangle();
+        circlec c = new circlec();
+        shape c1 = new circlec();
+        triangle t = new triangle();
+        shape t1 = new triangle();
+        Scanner sc = new Scanner(System.in);
+        String shapename;
+        int choice=0;
+        do {
+            System.out.println("Enter your choice");
+            System.out.println("1.Rectangle\n2.Circle\n3.Triangle\n4.Use StringBuffer\n5.Use StringBuilder\n6.StringBuffer to StringBuilder\n7.StringBuilder to StringBuffer\n8.Exit\n");
+            System.out.print("Your choice: ");
+            try {
+                choice = sc.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println(e);
+                System.out.println("Invalid input.Enter integer value\n");
+                sc.nextLine();
+                continue;
+            }
+            switch (choice) {
+                case 1:
+                    shapename = "Rectangle";
+                    r.displayname(shapename);
+                    double lenght,breadth;
+                    int choice2;
+                    do {
+                        System.out.println("Enter your choice");
+                        System.out.println("1.Calculate Area\n2.Calculate Perimeter\n3.Show Information\n4.Exit from rectangle\n");
+                        System.out.print("Your choice: ");
+                        choice2 = sc.nextInt();
+                        switch (choice2) {
+                            case 1:
+                                System.out.print("Enter the length of the rectangle: ");
+                                    try {
+                                        lenght = sc.nextDouble();
+                                        if(lenght<0){
+                                            try {
+                                                throw new myexception();
+                                            }catch (myexception e){
+                                                System.out.println(e);
+                                                sc.nextLine();
+                                                continue;
+                                            }
+                                        }
+                                    }catch (InputMismatchException e){
+                                        System.out.println(e);
+                                        System.out.println("Invalid input.Enter integer value\n");
+                                        sc.nextLine();
+                                        continue;
+                                    }
+                                System.out.print("Enter the breadth of the rectangle: ");
+                                breadth = sc.nextDouble();
+                                r.setlenght(lenght);
+                                r.setBreadth(breadth);
+                                System.out.println("Area of " + shapename + " is " + r.area()+"\n");
+                                break;
+                            case 2:
+                                System.out.print("Enter the length of the rectangle: ");
+                                lenght = sc.nextDouble();
+                                System.out.print("Enter the breadth of the rectangle: ");
+                                breadth = sc.nextDouble();
+                                r.setlenght(lenght);
+                                r.setBreadth(breadth);
+                                System.out.println("Perimeter of " + shapename + " is " + r.perimeter()+"\n");
+                                break;
+                            case 3:
+                                System.out.println(r1.information());
+                                System.out.println("\n");
+                                break;
+                            case 4:
+                                System.out.println("Exiting Rectangle..\n");
+                                break;
+                            default:
+                                System.out.println("Invalid choice.Choose again\n");
+                        }
+                    }while (choice2!=4);
+                    break;
+
+                case 2:
+                    shapename = "Circle";
+                    c.displayname(shapename);
+                    Double radius;
+                    int choice3;
+                    do {
+                        System.out.println("Enter your choice");
+                        System.out.println("1.Calculate Area\n2.Calculate Perimeter\n3.Calculate Diameter\n4.Show Information\n5.Exit from circle\n");
+                        System.out.print("Your choice: ");
+                        choice3 = sc.nextInt();
+                        switch (choice3) {
+                            case 1:
+                                System.out.print("Enter the radius of the circle: ");
+                                radius = sc.nextDouble();
+                                c.setRadius(radius);
+                                System.out.println("Area of the circle is "+c.area()+"\n");
+                                break;
+                            case 2:
+                                System.out.print("Enter the radius of the circle: ");
+                                radius = sc.nextDouble();
+                                c.setRadius(radius);
+                                System.out.println("Perimeter of the circle is "+c.perimeter()+"\n");
+                                break;
+                            case 3:
+                                System.out.print("Enter the radius of the circle: ");
+                                radius = sc.nextDouble();
+                                c.setRadius(radius);
+                                System.out.println("Diameter of the circle is "+c.diameter()+"\n");
+                                break;
+                            case 4:
+                                System.out.println(c1.information());
+                                System.out.println("\n");
+                                break;
+                            case 5:
+                                System.out.println("Exiting Circle..\n");
+                                break;
+                            default:
+                                System.out.println("Invalid choice.Choose again\n");
+                        }
+                    }while(choice3!=5);
+                    break;
+
+                case 3:
+                    shapename = "Triangle";
+                    t.displayname(shapename);
+                    int choice4;
+                    double height,length;
+                    do {
+                        System.out.println("Enter your choice");
+                        System.out.println("1.Calculate Area\n2.Calculate Perimeter\n3.Calculate Height\n4.Show Information\n5.Exit from triangle\n");
+                        System.out.print("Your choice: ");
+                        choice4 = sc.nextInt();
+                        switch (choice4) {
+                            case 1:
+                            System.out.print("Enter the Length of the triangle: ");
+                            length = sc.nextDouble();
+                            System.out.print("Enter the Height of the triangle: ");
+                            height = sc.nextDouble();
+                            t.sethl(height, length);
+                            System.out.println("Area of the triangle is " + t.area()+"\n");
+                            break;
+
+                            case 2:
+                            System.out.print("Enter the side A of the triangle: ");
+                            double aside = sc.nextDouble();
+                            System.out.print("Enter the side B of the triangle: ");
+                            double bside = sc.nextDouble();
+                            System.out.print("Enter the side C of the triangle: ");
+                            double cside = sc.nextDouble();
+                            t.setsides(aside, bside, cside);
+                            System.out.println("Perimeter of the triangle is " + t.perimeter()+"\n");
+                            break;
+
+                            case 3:
+                            System.out.print("Enter area of the triangle: ");
+                            double area = sc.nextDouble();
+                            System.out.print("Base of the triangle: ");
+                            double base = sc.nextDouble();
+                            t.setforheight(base,area);
+                            System.out.println("Height of the triangle is "+t.height()+"\n");
+                            break;
+
+                            case 4:
+                            System.out.println(t1.information());
+                            System.out.println("\n");
+                            break;
+                            case 5:
+                            System.out.println("Exiting Triangles..\n");
+                            break;
+                            default:
+                            System.out.println("Invalid choice.Choose again\n");
+                        }
+                    }while (choice4!=5);
+                    break;
+                case 4:
+                    sc.nextLine();
+                    System.out.print("Enter string: ");
+                    String getobj1 = sc.nextLine();
+                    StringBuffer stb1 = new StringBuffer(getobj1);
+                                stb1.append(" is the best.\n");
+                    System.out.println(stb1);
+                    break;
+                case 5:
+                    sc.nextLine();
+                    System.out.print("Enter string: ");
+                    String getobj2 = sc.nextLine();
+                    StringBuilder stb2 = new StringBuilder(getobj2);
+                                stb2.reverse();
+                    System.out.println("Reverse of String is "+stb2+"\n");
+                    break;
+                case 6:
+                    sc.nextLine();
+                    System.out.print("Enter string: ");
+                    String change=sc.nextLine();
+                    StringBuffer Bufferobj1 = new StringBuffer(change);
+                    String str1 = Bufferobj1.toString();
+                    StringBuilder Builderobj1 = new StringBuilder(str1);
+                    System.out.println(Builderobj1+" is now created using StringBuilder.\n");
+                    break;
+                case 7:
+                    sc.nextLine();
+                    System.out.print("Enter string: ");
+                    String change2=sc.nextLine();
+                    StringBuilder Builderobj2 = new StringBuilder(change2);
+                    String str2 = Builderobj2.toString();
+                    StringBuffer Bufferobj2 = new StringBuffer(str2);
+                    System.out.println(Bufferobj2+" is now created using StringBuffer.\n");
+                    break;
+                case 8:
+                    System.out.println("Exiting the program");
+                    break;
+                default:
+                    System.out.println("Invalid choice.Choose again");
+            }
+        }while (choice!=8);
+        sc.close();
+    }
+}

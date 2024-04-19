@@ -1,0 +1,109 @@
+import java.util.Scanner;
+
+public class assignment_3 {
+    public static void main(String [] args){
+        Scanner sc=new Scanner(System.in);
+        int choice;
+        person [] pArray = null;
+        do {
+            System.out.println("Choose an option");
+            System.out.println("1. Enter Details");
+            System.out.println("2. Show Details");
+            System.out.println("3. Exit");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the number of persons: ");
+                    int numperson=sc.nextInt();
+                    pArray=new person[numperson];
+                    for(int i=0;i<numperson;i++) {
+                        int id, salary;
+                        String name;
+
+                        System.out.print("Enter id: ");
+                        while (true) {
+                            if (sc.hasNextInt()) {
+                                id = sc.nextInt();
+                                break;
+                            } else {
+                                System.out.println("Invalid input");
+                                sc.next();
+                                System.out.print("Enter id: ");
+                            }
+                        }
+                        sc.nextLine();
+                        System.out.print("Enter name: ");
+                        name = sc.nextLine();
+
+                        System.out.print("Enter salary: ");
+                        while (true) {
+                            if (sc.hasNextInt()) {
+                                salary = sc.nextInt();
+                                break;
+                            } else {
+                                System.out.println("Invalid input");
+                                sc.next();
+                                System.out.print("Enter Salary: ");
+                            }
+                        }
+
+                        pArray[i] = new person(name);
+                        pArray[i].setId(id);
+                        pArray[i].setSalary(salary);
+                        System.out.println("Data entered successfully!\n");
+                    }
+                        break;
+
+                case 2:
+                   if(pArray!=null) {
+                       int Dchoice;
+                       do {
+                           System.out.println("\n1. Display using ID ");
+                           System.out.println("2. Display All ");
+                           System.out.println("3. Exit from display ");
+                           Dchoice = sc.nextInt();
+                           switch (Dchoice) {
+                               case 1:
+                                   System.out.print("Enter the id to be displayed: ");
+                                   int givenid = sc.nextInt();
+                                   boolean found = false;
+
+                                   for (person details : pArray) {
+                                       if (details.getId() == givenid) {
+                                           System.out.println("\nDisplaying:");
+                                           details.display();
+                                           found = true;
+                                           break;
+                                       }
+                                   }
+                                   if (!found) {
+                                       System.out.println("Person with ID " + givenid + " Not found");
+                                   }
+                                   break;
+                               case 2:
+                                   System.out.println("\nDisplaying All: \n");
+                                   for(person all:pArray){
+                                       all.display();
+                                       System.out.println();
+                                   }break;
+                               case 3:
+                                   System.out.println("Exiting display..\n");
+                                   break;
+                               default:
+                                   System.out.println("Invalid choice entered");
+                           }
+                       } while (Dchoice != 3);
+                   }
+                   else {System.out.println("Data Not Entered");}
+                   break;
+                case 3:
+                    System.out.println("Exiting the program");
+                    break;
+                default:
+                    System.out.println("Invalid choice entered");
+            }
+        }while (choice !=3);
+     sc.close();
+    }
+}
