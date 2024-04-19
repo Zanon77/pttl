@@ -1,5 +1,32 @@
 import java.util.Scanner;
-
+//This is part of assignment_3 pttl
+class person{
+    private int id;
+    private int salary;
+    private String name;
+    public void setId(int id){
+        this.id=id;
+    }
+    public int getId(){
+        return id;
+    }
+    public void setSalary(int salary){
+        this.salary=salary;
+    }
+    public person(int id,int salary){
+        this.id=id;
+        this.salary=salary;
+    }
+    public person(String name){
+        this(0,0);
+        this.name=name;
+    }
+    public void display(){
+        System.out.println("Name: "+name);
+        System.out.println("Salary: "+salary);
+        System.out.println("Id: "+id);
+    }
+}
 public class assignment_3 {
     public static void main(String [] args){
         Scanner sc=new Scanner(System.in);
