@@ -16,3 +16,10 @@ import java.awt.Graphics;
             showStatus("Made by: Chaman Sinha");
         }
     }
+
+//<html>
+//<body>
+//<applet code="assignment9.class" width="500" height="1000">
+//</applet>
+//</body>
+//</html>
