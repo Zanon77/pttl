@@ -1,0 +1,55 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+class ColorChooser extends JFrame implements ActionListener {
+
+    private JComboBox<String> chooseColor;
+    private JPanel colorPanel;
+
+    public ColorChooser() {
+        super("Color Chooser");
+
+        // Create JComboBox
+        chooseColor = new JComboBox<>();
+        chooseColor.addItem("Red");
+        chooseColor.addItem("Green");
+        chooseColor.addItem("Blue");
+        chooseColor.addActionListener(this);
+
+        // Create JPanel to display color
+        colorPanel = new JPanel();
+        colorPanel.setPreferredSize(new Dimension(300, 300));
+
+        // Add components to JFrame
+        add(chooseColor, BorderLayout.NORTH);
+        add(colorPanel, BorderLayout.CENTER);
+
+        // Set default background color
+        colorPanel.setBackground(Color.RED);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String color = (String) chooseColor.getSelectedItem();
+
+        switch (color) {
+            case "Red":
+                colorPanel.setBackground(Color.RED);
+                break;
+            case "Green":
+                colorPanel.setBackground(Color.GREEN);
+                break;
+            case "Blue":
+                colorPanel.setBackground(Color.BLUE);
+                break;
+        }
+    }
+
+    public static void main(String[] args) {
+            ColorChooser chooser = new ColorChooser();
+            chooser.setSize(400, 400);
+            chooser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            chooser.setVisible(true);
+        }
+    }
